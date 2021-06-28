@@ -6,7 +6,7 @@ long_description = (here / 'README.md').read_text(encoding='utf-8')
 
 setup(
     name='pyobservable',
-    version='1.0.0a1',
+    version='1.0.0',
     description='Simple event system for Python with weak reference support',
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -14,6 +14,7 @@ setup(
     author='Crimson-Crow',
     author_email='github@crimsoncrow.dev',
     classifiers=[
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
