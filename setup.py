@@ -6,7 +6,7 @@ long_description = (here / 'README.md').read_text(encoding='utf-8')
 
 setup(
     name='pyobservable',
-    version='1.0.0',
+    version='1.0.1',
     description='Simple event system for Python with weak reference support',
     long_description=long_description,
     long_description_content_type="text/markdown",
