@@ -25,7 +25,7 @@ setup(
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3 :: Only',
     ],
-    keywords='observer observable event handler',
+    keywords='observer observable event handler dispatcher weakref',
     license='MIT',
     python_requires='>=3.6, <4',
     py_modules=['pyobservable'],
