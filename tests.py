@@ -146,7 +146,3 @@ class EventDispatchTest(unittest.TestCase):
 
         handler = Mock()
         self.assertRaises(ValueError, observable.unbind, event_key, handler)
-
-
-if __name__ == '__main__':
-    unittest.main()
