@@ -12,7 +12,7 @@ class Observable:
 
     def __new__(cls, *args, **kwargs):
         instance = super(Observable, cls).__new__(cls)
-        event_mapping = {}
+        event_mapping: Dict[Hashable, EventHandlerMapping] = {}
         for c in cls.__mro__:
             for event_key in getattr(c, '_events_', []):
                 if event_key in event_mapping:
@@ -22,9 +22,6 @@ class Observable:
 
         instance._event_mapping = event_mapping
         return instance
-
-    def __init__(self):
-        self._event_mapping: Dict[Hashable, EventHandlerMapping]
 
     def add_event(self, event_key: Hashable) -> None:
         """"Adds an event to the list of possible events. Raise ValueError if the event key is already present."""
