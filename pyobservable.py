@@ -10,9 +10,11 @@ Handler = TypeVar('Handler', bound=Callable)
 class Observable:
     __slots__ = '_event_mapping',
 
+    _event_mapping: Dict[Hashable, EventHandlerMapping]
+
     def __new__(cls, *args, **kwargs):
         instance = super(Observable, cls).__new__(cls)
-        event_mapping: Dict[Hashable, EventHandlerMapping] = {}
+        event_mapping = {}
         for c in cls.__mro__:
             for event_key in getattr(c, '_events_', []):
                 if event_key in event_mapping:
