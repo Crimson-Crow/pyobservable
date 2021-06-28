@@ -6,11 +6,11 @@ long_description = (here / 'README.md').read_text(encoding='utf-8')
 
 setup(
     name='pyobservable',
-    version='1.0.0',
-    description='TODO',
+    version='1.0.0a1',
+    description='Simple event system for Python with weak reference support',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url='https://github.com/Crimson-Crow/TODO',
+    url='https://github.com/Crimson-Crow/pyobservable',
     author='Crimson-Crow',
     author_email='github@crimsoncrow.dev',
     classifiers=[
@@ -25,7 +25,7 @@ setup(
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3 :: Only',
     ],
-    keywords='TODO',
+    keywords='observer observable event handler',
     license='MIT',
     python_requires='>=3.6, <4',
     py_modules=['pyobservable'],
@@ -34,7 +34,7 @@ setup(
         'test': ['coverage'],
     },
     project_urls={
-        'Bug Reports': 'https://github.com/Crimson-Crow/TODO/issues',
-        'Source': 'https://github.com/Crimson-Crow/TODO',
+        'Bug Reports': 'https://github.com/Crimson-Crow/pyobservable/issues',
+        'Source': 'https://github.com/Crimson-Crow/pyobservable',
     },
 )
