@@ -1,10 +1,11 @@
 from collections.abc import Hashable
-from types import MethodType, FunctionType
-from typing import Callable, Optional, Tuple, Any, Dict, Union, TypeVar, cast
+from types import MethodType
+from typing import Callable, Optional, Tuple, Any, Dict, Union, TypeVar
 from weakref import WeakValueDictionary
 
 EventHandlerMapping = WeakValueDictionary
 Handler = TypeVar('Handler', bound=Callable)
+
 
 class Observable:
     __slots__ = '_event_mapping',
@@ -22,7 +23,7 @@ class Observable:
         """"Adds an event to the list of possible events."""
         self._event_mapping[event_key] = EventHandlerMapping()
 
-    def bind(self, event_key: Hashable, handler: Optional[Handler] = None) -> Handler:
+    def bind(self, event_key: Hashable, handler: Optional[Handler] = None) -> Union[Callable, Handler]:
         """Binds a handler function to the specified event. When handler is None, decorator usage is assumed."""
         event_handlers = self._get_handler_mapping(event_key)
 
@@ -33,7 +34,7 @@ class Observable:
             event_handlers[k] = v
             return callback
 
-        return cast(Handler, bind) if handler is None else bind(handler)
+        return bind if handler is None else bind(handler)
 
     def unbind(self, event_key: Hashable, handler: Handler) -> None:
         """Removes the provided event handlers from the specified event."""
