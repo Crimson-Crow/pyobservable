@@ -12,16 +12,26 @@ class Observable:
 
     def __new__(cls, *args, **kwargs):
         instance = super(Observable, cls).__new__(cls)
-        instance._event_mapping = {event: EventHandlerMapping() for c in cls.__mro__ for event in
-                                   getattr(c, '_events_', [])}
+        event_mapping = {}
+        for c in cls.__mro__:
+            for event_key in getattr(c, '_events_', []):
+                if event_key in event_mapping:
+                    raise ValueError(f'Duplicate event key: {event_key!r}')
+                else:
+                    event_mapping[event_key] = EventHandlerMapping()
+
+        instance._event_mapping = event_mapping
         return instance
 
     def __init__(self):
         self._event_mapping: Dict[Hashable, EventHandlerMapping]
 
     def add_event(self, event_key: Hashable) -> None:
-        """"Adds an event to the list of possible events."""
-        self._event_mapping[event_key] = EventHandlerMapping()
+        """"Adds an event to the list of possible events. Raise ValueError if the event key is already present."""
+        if event_key in self._event_mapping:
+            raise ValueError(f'Duplicate event key: {event_key!r}')
+        else:
+            self._event_mapping[event_key] = EventHandlerMapping()
 
     def bind(self, event_key: Hashable, handler: Optional[Handler] = None) -> Union[Callable, Handler]:
         """Binds a handler function to the specified event. When handler is None, decorator usage is assumed."""

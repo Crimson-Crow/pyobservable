@@ -59,10 +59,10 @@ class EventDispatchTest(unittest.TestCase):
         self.assertEqual(handler.call_count, len(event_keys))
 
     def test_multiinheritance(self):
-        base_event_keys = []
-        child1_event_keys = []
-        child2_event_keys = []
-        multichild_event_keys = []
+        base_event_keys = [1, 2, 3]
+        child1_event_keys = ['a', 'b']
+        child2_event_keys = [sentinel]
+        multichild_event_keys = ['foo']
         event_keys = set()
         event_keys.update(base_event_keys, child1_event_keys, child2_event_keys, multichild_event_keys)
 
@@ -81,6 +81,22 @@ class EventDispatchTest(unittest.TestCase):
         multichild = MultiChild()
 
         self.assertEqual(multichild._event_mapping.keys(), event_keys)
+
+    def test_duplicate_event_key(self):
+        base_event_keys = [1, 2, 3]
+        child_event_keys = ['a', 3]
+
+        class Base(Observable):
+            _events_ = base_event_keys
+
+        class Child(Base):
+            _events_ = child_event_keys
+
+        self.assertRaises(ValueError, Child)
+
+        observable = Observable()
+        observable.add_event('foo')
+        self.assertRaises(ValueError, observable.add_event, 'foo')
 
     def test_decorator_bind(self):
         event_key = 'key'
