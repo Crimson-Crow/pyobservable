@@ -1,5 +1,5 @@
 pyobservable
-==========
+============
 
 [![PyPI](https://img.shields.io/pypi/v/pyobservable)](https://pypi.org/project/pyobservable/)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pyobservable)](https://pypi.org/project/pyobservable/)
